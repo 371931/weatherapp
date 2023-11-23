@@ -24,7 +24,7 @@
 
             <% if (locals.datas) { %> 
             <div class="success">
-                <img src="images/<%= datas.weather[0].main %>.png" alt="">
+                <img src="<%= links %>" alt="">
                 <div class="degree"><%= datas.main.temp %><span>°C</span></div>
                 <div class="cloudsMessage"><%= datas.weather[0].description %></div>
                 <div class="huwin">
