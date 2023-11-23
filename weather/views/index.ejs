@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+    <div class="container">
+        <div class="contentBox">
+            <div class="searchbox">
+                <label for="location">
+                <i class="fa fa-map-marker fade-in" aria-hidden="true"></i></label>
+            <form action="/location" method="post">
+                <input type="text" name="location" id="location" placeholder="Enter Your Location" class="fade-in" autofocus>
+                <label for="location">
+                <button class="btn"><i class="fa fa-search fade-in" aria-hidden="true"></i></label></button>
+            </form>
+            </div>
+
+            <% if (locals.datas) { %> 
+            <div class="success">
+                <img src="images/<%= datas.weather[0].main %>.png" alt="">
+                <div class="degree"><%= datas.main.temp %><span>°C</span></div>
+                <div class="cloudsMessage"><%= datas.weather[0].description %></div>
+                <div class="huwin">
+                    <div class="humidity"><span class="material-symbols-outlined">water</span><div class="per"><div class="percent"><%= datas.main.humidity %>%</div><p>humidity</p></div></div>
+                    <div class="wind"><span class="material-symbols-outlined">air</span><div class="per"><div class="percent"><%= datas.wind.speed %>km/h</div><p>Wind Speed</p></div></div>
+                </div>
+            </div>
+            <% } %>
+
+            <% if (locals.error) { %>
+            <div class="err">
+                <img src="images/locanf.png" alt="" >
+                <div class="errMsg">Oops! Invalid Location :/</div>
+            </div>
+            <% } %>
+
+            <% if (locals.alert) { %>
+             <script>
+                alert('<%= alert%>');
+             </script>
+            <% } %>
+             
+        </div>
+    </div>
+</body>
+<script>
+    const searchbox = document.querySelector('#location');
+    const searchbtn = document.querySelector('.btn');
+    const searchImg = document.querySelector('.success img');
+
+    searchbtn.addEventListener('click',()=>{
+        if(searchbox.value === ''){
+            alert("enter location");
+            return;
+        }
+    });
+</script>
+</html>

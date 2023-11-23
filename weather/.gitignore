@@ -1,0 +1,15 @@
+node_modules/
+/dist/
+/logs/
+.env
+.env.*
+*.log
+Thumbs.db
+/package-lock.json
+/yarn.lock
+.vscode/
+.idea/
+/coverage/
+/docs/
+*.config.js
+*.config.json
