@@ -10,18 +10,16 @@ app.set('view engine', 'ejs');
 
 app.use(express.static("public"));
 
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({extended:true}));
 
-app.get("",async(req,res)=>{
+app.get("",(req,res)=>{
     res.render("index.ejs");
 });
 
 app.post("/location",async(req,res)=>{
     let obj = req.body;
     let location = obj.location;
-    if (location === '' ) {
-        return res.redirect('/');  
-    }else{
+    if (location !== '' ) { 
         try{
             let response = await axios.get("http://api.openweathermap.org/data/2.5/weather",{
                 params:{
@@ -34,7 +32,6 @@ app.post("/location",async(req,res)=>{
             let link = weather(condition);
             res.render("index.ejs",{datas : result, links:link});
         }catch(error){
-            console.log(error.response.data);
             res.render("index.ejs",{error : "nothing"})
         }
     }
